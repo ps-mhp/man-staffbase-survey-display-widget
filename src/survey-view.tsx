@@ -14,7 +14,8 @@
 import React from "react";
 
 import * as loader from "./plugin-loader";
-import { BranchContext, SURVEY_ELEMENT, buildSurveyAttributes } from "./survey-attributes";
+import * as surveyAttributes from "./survey-attributes";
+import { BranchContext, SURVEY_ELEMENT } from "./survey-attributes";
 
 const MISSING_ID =
   "Keine Installations-ID konfiguriert. Bitte die ID der Umfrage in den Widget-Einstellungen eintragen.";
@@ -55,13 +56,19 @@ export function SurveyView({ installationId, pluginUrl, branch }: SurveyViewProp
     let current = true;
     setState({ status: "loading" });
 
-    loader
-      .loadSurveyPlugin(pluginUrl)
-      .then(() => {
+    // Sprache und Bundle zusammen: die Sprache ist ein eigener Request und
+    // haette nacheinander die Wartezeit verdoppelt.
+    Promise.all([loader.loadSurveyPlugin(pluginUrl), surveyAttributes.fetchUserLocale()])
+      .then(([, locale]) => {
         if (!current || host.current === null) return;
 
         const element = document.createElement(SURVEY_ELEMENT);
-        const attributes = buildSurveyAttributes({ installationId, pluginUrl, branch });
+        const attributes = surveyAttributes.buildSurveyAttributes({
+          installationId,
+          pluginUrl,
+          branch,
+          locale,
+        });
         for (const [name, value] of Object.entries(attributes)) element.setAttribute(name, value);
 
         host.current.replaceChildren(element);

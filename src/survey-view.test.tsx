@@ -17,6 +17,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { SurveyView } from "./survey-view";
 import { SURVEY_ELEMENT, DEFAULT_PLUGIN_URL } from "./survey-attributes";
 import * as loader from "./plugin-loader";
+import * as attributes from "./survey-attributes";
 
 const INSTALLATION_ID = "6a7c13cf2b9a846ee2d8955d";
 
@@ -45,6 +46,29 @@ describe("SurveyView", () => {
     expect(element.getAttribute("data-app-branch-slug")).toBe("mansales");
     expect(element.getAttribute("data-app-version")).toBeTruthy();
     expect(loader.loadSurveyPlugin).toHaveBeenCalledWith(DEFAULT_PLUGIN_URL);
+  });
+
+  it("hands the element the user's own language, not the document's", async () => {
+    // Staffbase runs the interface in the browser's language while the content
+    // follows the user's setting; on the live app the document said `de` for a
+    // user set to `it_IT`. Reading the document here would show the survey in
+    // a language the user did not choose.
+    jest.spyOn(loader, "loadSurveyPlugin").mockResolvedValue(undefined);
+    jest.spyOn(attributes, "fetchUserLocale").mockResolvedValue("it_IT");
+    document.documentElement.setAttribute("lang", "de");
+
+    const { container } = render(
+      <SurveyView installationId={INSTALLATION_ID} pluginUrl={DEFAULT_PLUGIN_URL} branch={branch} />,
+    );
+
+    const element = await waitFor(() => {
+      const found = container.querySelector(SURVEY_ELEMENT);
+      expect(found).not.toBeNull();
+      return found!;
+    });
+
+    expect(element.getAttribute("data-locale")).toBe("it_IT");
+    document.documentElement.removeAttribute("lang");
   });
 
   it("reports a missing installation id without loading anything", async () => {

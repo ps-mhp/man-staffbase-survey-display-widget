@@ -14,6 +14,7 @@
 import {
   readInstallationId,
   documentLocale,
+  fetchUserLocale,
   buildSurveyAttributes,
   DEFAULT_PLUGIN_URL,
 } from "./survey-attributes";
@@ -116,5 +117,55 @@ describe("buildSurveyAttributes", () => {
     expect(attributes["api-url"]).toBe(DEFAULT_PLUGIN_URL);
     expect(attributes.dir).toBe("ltr");
     expect(attributes["data-locale"]).toBeTruthy();
+  });
+});
+
+describe("fetchUserLocale", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+    document.documentElement.removeAttribute("lang");
+  });
+
+  it("prefers the locale the app has on file for the user", async () => {
+    // Measured against the live app: the document said `de` while the user was
+    // set to `it_IT`. The document is the app's rendering language, not the
+    // user's choice, so it must not have the last word.
+    jest
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValue(
+        new Response(JSON.stringify({ config: { locale: "it_IT" } }), { status: 200 }),
+      );
+    document.documentElement.setAttribute("lang", "de");
+
+    await expect(fetchUserLocale()).resolves.toBe("it_IT");
+  });
+
+  it("falls back to the document when the profile says nothing", async () => {
+    jest
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValue(new Response(JSON.stringify({ config: {} }), { status: 200 }));
+    document.documentElement.setAttribute("lang", "fr-FR");
+
+    await expect(fetchUserLocale()).resolves.toBe("fr_FR");
+  });
+
+  it("falls back to the document when the profile cannot be read", async () => {
+    jest.spyOn(globalThis, "fetch").mockRejectedValue(new Error("offline"));
+    document.documentElement.setAttribute("lang", "pl-PL");
+
+    await expect(fetchUserLocale()).resolves.toBe("pl_PL");
+  });
+
+  it("accepts an explicitly given locale over everything else", async () => {
+    const fetchMock = jest.spyOn(globalThis, "fetch");
+    const attributes = buildSurveyAttributes({
+      installationId: "6a7c13cf2b9a846ee2d8955d",
+      pluginUrl: DEFAULT_PLUGIN_URL,
+      branch: null,
+      locale: "es_ES",
+    });
+
+    expect(attributes["data-locale"]).toBe("es_ES");
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });

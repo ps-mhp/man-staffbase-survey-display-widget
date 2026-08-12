@@ -43,6 +43,8 @@ export interface SurveyAttributeInput {
   installationId: string;
   pluginUrl: string;
   branch: BranchContext | null;
+  /** Die Sprache des Nutzers; ohne Angabe die des Dokuments. */
+  locale?: string;
 }
 
 /**
@@ -58,12 +60,12 @@ export function readInstallationId(raw: unknown): string | null {
 }
 
 /**
- * The reader's language in the spelling the survey API uses (`de_DE`).
+ * Die Sprache, die das Dokument nennt — nicht die des Nutzers.
  *
- * Taken from the document, which the Staffbase app serves in the language the
- * user has chosen; `navigator.language` is the browser's setting and therefore
- * only the last resort. Which translations actually exist is the plugin's
- * business — it is handed a language, not a decision.
+ * Staffbase mischt beides: die Oberfläche folgt der Browsersprache, während
+ * die Inhalte der Spracheinstellung des Nutzers folgen. Auf einer laufenden
+ * App gemessen stand hier `de`, während der Nutzer auf `it_IT` eingestellt
+ * war. Deshalb ist das hier nur der Rückfall für `fetchUserLocale`.
  */
 export function documentLocale(): string {
   const meta = document.querySelector('meta[http-equiv="content-language"]');
@@ -81,6 +83,32 @@ export function documentLocale(): string {
 }
 
 /**
+ * Die Spracheinstellung des Nutzers, wie die App sie führt.
+ *
+ * `SBUserProfile` aus dem Widget-SDK hat kein Sprachfeld, `/api/users/me` aber
+ * schon (`config.locale`). Der Aufruf läuft same-origin mit der Sitzung des
+ * Nutzers und kostet auf einer Seite mit Umfrage einen Request.
+ *
+ * Schlägt er fehl, tritt das Dokument an seine Stelle: eine Umfrage in der
+ * falschen Sprache ist immer noch eine Umfrage, eine ausgefallene keine.
+ */
+export async function fetchUserLocale(): Promise<string> {
+  try {
+    const response = await fetch("/api/users/me", {
+      credentials: "same-origin",
+      headers: { Accept: "application/json" },
+    });
+    if (!response.ok) return documentLocale();
+
+    const user = (await response.json()) as { config?: { locale?: string } };
+    const locale = user.config?.locale?.trim().replace("-", "_");
+    return locale || documentLocale();
+  } catch {
+    return documentLocale();
+  }
+}
+
+/**
  * Everything the plugin's element expects, as the plugin's own page would set it.
  *
  * `installation-id` is written twice because the element reads
@@ -88,7 +116,7 @@ export function documentLocale(): string {
  * makes the widget independent of which one a future version keeps.
  */
 export function buildSurveyAttributes(input: SurveyAttributeInput): Record<string, string> {
-  const { installationId, pluginUrl, branch } = input;
+  const { installationId, pluginUrl, branch, locale } = input;
 
   return {
     "installation-id": installationId,
@@ -102,7 +130,7 @@ export function buildSurveyAttributes(input: SurveyAttributeInput): Record<strin
     "data-app-version": FALLBACK_APP_VERSION,
     "data-is-preview": "false",
     "data-lang-informal": "false",
-    "data-locale": documentLocale(),
+    "data-locale": locale ?? documentLocale(),
     dir: document.documentElement.getAttribute("dir") === "rtl" ? "rtl" : "ltr",
   };
 }
