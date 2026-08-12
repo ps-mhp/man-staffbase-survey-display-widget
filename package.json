@@ -1,0 +1,11 @@
+{
+  "name": "@man/survey-display-widget",
+  "version": "0.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "staffbase": {
+    "element": "survey-display-widget",
+    "bundle": "dist/survey-display-widget.js"
+  }
+}
