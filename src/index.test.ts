@@ -11,7 +11,12 @@
  * limitations under the License.
  */
 
-import { INSTALLATION_ID_ATTRIBUTE, PLUGIN_URL_ATTRIBUTE, readPluginUrl } from "./index";
+import {
+  INSTALLATION_ID_ATTRIBUTE,
+  PLUGIN_URL_ATTRIBUTE,
+  readPluginUrl,
+  stopSurveyPickerInjector,
+} from "./index";
 import { configurationSchema, uiSchema } from "./configuration-schema";
 import { DEFAULT_PLUGIN_URL } from "./survey-attributes";
 
@@ -45,5 +50,14 @@ describe("readPluginUrl", () => {
     expect(readPluginUrl("")).toBe(DEFAULT_PLUGIN_URL);
     expect(readPluginUrl("   ")).toBe(DEFAULT_PLUGIN_URL);
     expect(readPluginUrl(42)).toBe(DEFAULT_PLUGIN_URL);
+  });
+});
+
+describe("the picker injector", () => {
+  it("is started at module load and can be stopped again", () => {
+    // The dialog may open before or after the bundle loads, so the injector
+    // has to be watching from the start rather than triggered by a render.
+    expect(typeof stopSurveyPickerInjector).toBe("function");
+    stopSurveyPickerInjector();
   });
 });

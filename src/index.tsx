@@ -22,6 +22,7 @@ import ReactDOM from "react-dom/client";
 import { BlockFactory, BlockDefinition, ExternalBlockDefinition, BaseBlock } from "widget-sdk";
 import { configurationSchema, uiSchema } from "./configuration-schema";
 import { BranchContext, DEFAULT_PLUGIN_URL, readInstallationId } from "./survey-attributes";
+import { startSurveyPickerInjector } from "./survey-picker-injector";
 import { SurveyView } from "./survey-view";
 import icon from "../resources/survey-display-widget.svg";
 import pkg from "../package.json";
@@ -52,6 +53,19 @@ export function readPluginUrl(raw: unknown): string {
   const trimmed = raw.trim().replace(/\/+$/, "");
   return trimmed === "" ? DEFAULT_PLUGIN_URL : trimmed;
 }
+
+/**
+ * Watches for the configuration dialog from module load on.
+ *
+ * The dialog is opened by the host, not by this widget, and may already be on
+ * screen by the time the bundle arrives — so there is no render to hook into.
+ * Costs nothing on a published page, where the field never appears.
+ *
+ * Exported only so tests can dispose of the observer on teardown (jsdom tears
+ * down its `window` between test files, which would otherwise let a lingering
+ * `MutationObserver` callback throw); production code never calls this.
+ */
+export const stopSurveyPickerInjector = startSurveyPickerInjector();
 
 const factory: BlockFactory = (BaseBlockClass, widgetApi) => {
   return class SurveyDisplayWidgetBlock extends BaseBlockClass implements BaseBlock {
