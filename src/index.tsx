@@ -22,7 +22,9 @@ import ReactDOM from "react-dom/client";
 import { BlockFactory, BlockDefinition, ExternalBlockDefinition, BaseBlock } from "widget-sdk";
 import { configurationSchema, uiSchema } from "./configuration-schema";
 import { BranchContext, DEFAULT_PLUGIN_URL, readInstallationId } from "./survey-attributes";
-import { startSurveyPickerInjector } from "./survey-picker-injector";
+import { fetchEntityCatalog } from "@shared/entity-picker/entity-catalog";
+import { startEntityPickerInjector } from "@shared/entity-picker/entity-picker-injector";
+import { surveyCatalogSource } from "./survey-catalog";
 import { SurveyView } from "./survey-view";
 import icon from "../resources/survey-display-widget.svg";
 import pkg from "../package.json";
@@ -65,7 +67,19 @@ export function readPluginUrl(raw: unknown): string {
  * down its `window` between test files, which would otherwise let a lingering
  * `MutationObserver` callback throw); production code never calls this.
  */
-export const stopSurveyPickerInjector = startSurveyPickerInjector();
+/** Copy for the dropdown next to the `installation-id` field. */
+const SURVEY_PICKER_LABELS = {
+  placeholder: "Umfrage auswählen …",
+  manualOption: "Andere ID eingeben …",
+  unavailableNotice:
+    "Die Liste der Umfragen konnte nicht geladen werden. Bitte die Installations-ID eintragen.",
+};
+
+export const stopSurveyPickerInjector = startEntityPickerInjector({
+  fieldKey: INSTALLATION_ID_ATTRIBUTE,
+  fetchOptions: () => fetchEntityCatalog(surveyCatalogSource),
+  labels: SURVEY_PICKER_LABELS,
+});
 
 const factory: BlockFactory = (BaseBlockClass, widgetApi) => {
   return class SurveyDisplayWidgetBlock extends BaseBlockClass implements BaseBlock {

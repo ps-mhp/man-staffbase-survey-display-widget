@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import { CATALOG_ENDPOINT, fetchSurveyCatalog } from "./survey-catalog";
+import { CATALOG_ENDPOINT, surveyCatalogSource } from "./survey-catalog";
 
 const entry = (id: string, localization: unknown): unknown => ({
   data: { id, config: { localization } },
@@ -22,81 +22,66 @@ const respondWith = (body: unknown): jest.SpyInstance =>
     .spyOn(globalThis, "fetch")
     .mockResolvedValue(new Response(JSON.stringify(body), { status: 200 }));
 
-describe("fetchSurveyCatalog", () => {
-  afterEach(() => {
-    jest.restoreAllMocks();
-    document.documentElement.removeAttribute("lang");
-  });
+describe("surveyCatalogSource.fetchList", () => {
+  afterEach(() => jest.restoreAllMocks());
 
   it("asks only for surveys the author may actually manage", async () => {
     const fetchMock = respondWith({ total: 0, entries: [] });
 
-    await fetchSurveyCatalog();
+    await surveyCatalogSource.fetchList();
 
     const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     expect(url.startsWith(CATALOG_ENDPOINT)).toBe(true);
     expect(url).toContain("permission=manage");
+    expect(url).toContain("limit=100");
+    expect(url).toContain("sort=created_DESC");
     // Without the cookie the endpoint answers 401 and the list stays empty.
     expect(init.credentials).toBe("same-origin");
   });
 
-  it("names each survey in the language of the page", async () => {
-    document.documentElement.setAttribute("lang", "de-DE");
-    respondWith({
-      total: 1,
-      entries: [entry("6a7c2c3581f6c51d454ab4ca", { en_US: { title: "Poll" }, de_DE: { title: "Umfrage" } })],
-    });
+  it("returns the raw entries as-is for toOption to map", async () => {
+    respondWith({ total: 1, entries: [entry("aaaaaaaaaaaaaaaaaaaaaaaa", { en_US: { title: "Poll" } })] });
 
-    await expect(fetchSurveyCatalog()).resolves.toEqual([
-      { id: "6a7c2c3581f6c51d454ab4ca", title: "Umfrage" },
+    await expect(surveyCatalogSource.fetchList()).resolves.toEqual([
+      entry("aaaaaaaaaaaaaaaaaaaaaaaa", { en_US: { title: "Poll" } }),
     ]);
-  });
-
-  it("falls back to English and then to whatever title exists", async () => {
-    document.documentElement.setAttribute("lang", "fr-FR");
-    respondWith({
-      total: 2,
-      entries: [
-        entry("aaaaaaaaaaaaaaaaaaaaaaaa", { en_US: { title: "English" }, it_IT: { title: "Italiano" } }),
-        entry("bbbbbbbbbbbbbbbbbbbbbbbb", { it_IT: { title: "Solo italiano" } }),
-      ],
-    });
-
-    await expect(fetchSurveyCatalog()).resolves.toEqual([
-      { id: "aaaaaaaaaaaaaaaaaaaaaaaa", title: "English" },
-      { id: "bbbbbbbbbbbbbbbbbbbbbbbb", title: "Solo italiano" },
-    ]);
-  });
-
-  it("shows the id when a survey carries no title at all", async () => {
-    // A nameless row in the list would be indistinguishable from its
-    // neighbours; the id at least identifies it.
-    respondWith({ total: 1, entries: [entry("cccccccccccccccccccccccc", {})] });
-
-    await expect(fetchSurveyCatalog()).resolves.toEqual([
-      { id: "cccccccccccccccccccccccc", title: "cccccccccccccccccccccccc" },
-    ]);
-  });
-
-  it("skips entries without an id rather than listing a broken one", async () => {
-    respondWith({ total: 2, entries: [{ data: { config: {} } }, entry("dddddddddddddddddddddddd", {})] });
-
-    await expect(fetchSurveyCatalog()).resolves.toEqual([
-      { id: "dddddddddddddddddddddddd", title: "dddddddddddddddddddddddd" },
-    ]);
-  });
-
-  it("answers with an empty list when the request fails", async () => {
-    // The caller falls back to the plain id field; an exception here would
-    // instead take the whole configuration dialog down with it.
-    jest.spyOn(globalThis, "fetch").mockRejectedValue(new Error("offline"));
-
-    await expect(fetchSurveyCatalog()).resolves.toEqual([]);
   });
 
   it("answers with an empty list when the author may not see the surveys", async () => {
     jest.spyOn(globalThis, "fetch").mockResolvedValue(new Response("", { status: 403 }));
 
-    await expect(fetchSurveyCatalog()).resolves.toEqual([]);
+    await expect(surveyCatalogSource.fetchList()).resolves.toEqual([]);
+  });
+
+  it("lets a network failure propagate to the shared loader", async () => {
+    // `fetchEntityCatalog` is the one that turns this into an empty list; this
+    // source is not responsible for catching it itself.
+    jest.spyOn(globalThis, "fetch").mockRejectedValue(new Error("offline"));
+
+    await expect(surveyCatalogSource.fetchList()).rejects.toThrow("offline");
+  });
+});
+
+describe("surveyCatalogSource.toOption", () => {
+  afterEach(() => document.documentElement.removeAttribute("lang"));
+
+  it("names the survey in the language of the page", () => {
+    document.documentElement.setAttribute("lang", "de-DE");
+
+    expect(
+      surveyCatalogSource.toOption(
+        entry("aaaaaaaaaaaaaaaaaaaaaaaa", { en_US: { title: "Poll" }, de_DE: { title: "Umfrage" } }) as never,
+      ),
+    ).toEqual({ id: "aaaaaaaaaaaaaaaaaaaaaaaa", title: "Umfrage" });
+  });
+
+  it("shows the id when a survey carries no title at all", () => {
+    expect(
+      surveyCatalogSource.toOption(entry("cccccccccccccccccccccccc", {}) as never),
+    ).toEqual({ id: "cccccccccccccccccccccccc", title: "cccccccccccccccccccccccc" });
+  });
+
+  it("skips entries without an id rather than listing a broken one", () => {
+    expect(surveyCatalogSource.toOption({ data: { config: {} } } as never)).toBeNull();
   });
 });
