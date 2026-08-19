@@ -1,20 +1,47 @@
 # Domande frequenti
 
-**Domanda:** Il sondaggio non viene visualizzato — da cosa può dipendere?
+**Domanda:** Viene visualizzato il messaggio “Nessun ID di installazione configurato. Inserire l’ID del
+sondaggio nelle impostazioni del widget”.
 
-Risposta: Il più delle volte manca l’ID di installazione o non è corretto. Per
-verificare, inserisci l’URL completo del sondaggio direttamente nel campo —
-il widget legge automaticamente l’ID, quindi è escluso che ci sia un errore di digitazione nell’
-ID stesso.
+Risposta: Non è stato selezionato alcun sondaggio. Selezionare un sondaggio dall’elenco oppure
+inserire l’indirizzo completo del sondaggio nel campo.
 
-**Domanda:** Quando devo modificare l’«Indirizzo del plugin per i sondaggi»?
+**Domanda:** Viene visualizzato il messaggio «Impossibile caricare il sondaggio».
 
-Risposta: Solo se l’app per i sondaggi dell’organizzazione si trova in una regione
-diversa da quella predefinita. Normalmente questo campo rimane invariato.
+Risposta: Nella maggior parte dei casi l’ID di installazione non è corretto, oppure il sondaggio è stato
+cancellato o non è stato pubblicato. Per verificare, inserire nuovamente l’indirizzo completo
+del sondaggio nel campo. Se nel messaggio è presente anche un
+indirizzo web, significa che l’app dei sondaggi non è stata trovata all’indirizzo
+inserito — in tal caso, reimpostare il campo “Indirizzo del plugin dei sondaggi”
+alle impostazioni predefinite.
 
-**Domanda:** Posso utilizzare questo widget anche per creare nuovi sondaggi o
-modificare le domande?
+**Domanda:** Nella finestra di dialogo di configurazione compare il messaggio «Impossibile caricare l’elenco dei sondaggi.
+Inserire l’ID di installazione».
 
-Risposta: No. Il widget mostra solo un sondaggio già creato;
-le domande, il periodo e la valutazione continuano a essere gestiti esclusivamente tramite l’
-app Sondaggi di Staffbase.
+Risposta: Non c’è motivo di preoccuparsi: l’elenco a tendina è solo una funzione di comodità.
+È sufficiente inserire l’indirizzo completo del sondaggio nel campo.
+
+**Domanda:** Quando devo modificare l’«Indirizzo del plugin dei sondaggi»?
+
+Risposta: Praticamente mai. Solo se l’app dei sondaggi dell’organizzazione si trova in una
+regione diversa da quella predefinita. In caso di dubbio, lasciarlo invariato e
+chiedere al reparto IT.
+
+**Domanda:** Posso modificare le domande o analizzare i risultati
+con questo widget?
+
+Risposta: No. Le domande, il periodo di tempo e l’analisi si trovano esclusivamente nell’
+app dei sondaggi di Staffbase.
+
+**Domanda:** Una persona ha già votato e ora vede qualcosa di diverso da
+me.
+
+Risposta: È normale. Il widget mostra il sondaggio esattamente come l’
+app dei sondaggi lo presenta a quella persona — ovvero, a seconda dello stato, il modulo,
+un messaggio di ringraziamento o i risultati.
+
+**Domanda:** Le risposte vengono conteggiate due volte se incorporo lo stesso sondaggio su più
+pagine?
+
+Risposta: No. Si tratta sempre dello stesso sondaggio con una valutazione
+comune.

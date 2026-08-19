@@ -2,9 +2,11 @@
 
 | Setting | Description |
 | --- | --- |
-| Survey Installation ID | The ID of the survey installation to be displayed—the 24-character string at the end of the survey URL. Required field. |
-| Survey Plugin Address | Only change this if the Survey app is located in a region other than the default. Generally, leave this unchanged. |
+| Survey Installation ID | The survey to be displayed. Required field. Usually selected from the drop-down list; alternatively, enter the full survey URL or the 24-character string at the end of it. |
+| Survey Plugin Address | Technical address of the survey app. Preset and generally to be left **unchanged**. Only adjust if the organization’s survey app is hosted in a different region—this is something IT knows, not the editorial team. |
 
-Instead of just the ID, you can also enter the
-full survey URL in the “Survey Installation ID” field; the widget will
-extract the ID from it automatically.
+## About the drop-down list
+
+The list shows only surveys for which you have **administrative rights**. A
+third-party survey that you are permitted to embed will not appear there; however,
+you can still add it by pasting the address.

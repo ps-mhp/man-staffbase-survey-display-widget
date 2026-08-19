@@ -1,10 +1,12 @@
 # Configuración
 
-| Configuración | Descripción |
+| Parámetro | Descripción |
 | --- | --- |
-| ID de instalación de la encuesta | El ID de la instalación de la encuesta que se va a mostrar: la cadena de 24 caracteres que aparece al final de la URL de la encuesta. Campo obligatorio. |
-| Dirección del complemento de encuestas | Modifíquela solo si la aplicación de encuestas se encuentra en una región distinta a la predeterminada. Por lo general, déjela sin cambios. |
+| ID de instalación de la encuesta | La encuesta que se va a mostrar. Campo obligatorio. Normalmente se selecciona de la lista desplegable; como alternativa, se puede introducir la dirección completa de la encuesta o la cadena de 24 caracteres que aparece al final de la misma. |
+| Dirección del complemento de encuestas | Dirección técnica de la aplicación de encuestas. Viene preconfigurada y, por regla general, debe dejarse **sin modificar**. Solo debe modificarse si la aplicación de encuestas de la organización se gestiona en otra región; esto lo sabe el departamento de TI, no la redacción. |
 
-En lugar del ID solo, en «ID de instalación de la encuesta» también se puede introducir la
-URL completa de la encuesta; el widget extrae el ID
-por sí mismo de dicha URL.
+## Acerca de la lista de selección
+
+La lista solo muestra las encuestas para las que tiene **derechos de administración**. Por lo tanto, una
+encuesta ajena que esté autorizado a incrustar no aparecerá allí; no obstante,
+se puede añadir introduciendo la dirección.

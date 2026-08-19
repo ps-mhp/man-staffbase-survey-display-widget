@@ -1,11 +1,16 @@
 {
   "title": "Pubblicità relativa al sondaggio",
-  "summary": "Incorpora un'installazione del sondaggio Staffbase nel punto in cui viene posizionato il widget.",
+  "summary": "Visualizza un sondaggio Staffbase esistente direttamente su qualsiasi pagina.",
   "pages": [
     {
       "id": "overview",
       "title": "Panoramica",
       "file": "overview.md"
+    },
+    {
+      "id": "usage",
+      "title": "Passo dopo passo",
+      "file": "usage.md"
     },
     {
       "id": "settings",

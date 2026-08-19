@@ -2,9 +2,11 @@
 
 | Ustawienie | Opis |
 | --- | --- |
-| Identyfikator instalacji ankiety | Identyfikator instalacji ankiety, która ma zostać wyświetlona — 24-znakowy ciąg znaków znajdujący się na końcu adresu URL ankiety. Pole obowiązkowe. |
-| Adres wtyczki ankiet | Należy zmieniać tylko wtedy, gdy aplikacja ankietowa znajduje się w innym regionie niż domyślny. Zazwyczaj należy pozostawić bez zmian. |
+| Identyfikator instalacji ankiety | Ankieta, która ma zostać wyświetlona. Pole obowiązkowe. Zazwyczaj wybiera się ją z listy rozwijanej; alternatywnie można wpisać pełny adres ankiety lub 24-znakowy ciąg znaków znajdujący się na jego końcu. |
+| Adres wtyczki ankietowej | Techniczny adres aplikacji ankietowej. Ustawiony domyślnie i z reguły należy pozostawić **bez zmian**. Należy dostosować tylko wtedy, gdy aplikacja ankietowa organizacji działa w innym regionie — o tym wie dział IT, a nie redakcja. |
 
-Zamiast samego identyfikatora w polu „Identyfikator instalacji ankiety” można również
-wpisać pełny adres URL ankiety; widżet sam odczyta z niego identyfikator
-.
+## O liście wyboru
+
+Lista wyświetla wyłącznie ankiety, do których masz **uprawnienia administracyjne**.
+Zewnętrzna ankieta, którą możesz osadzić, nie pojawi się więc na tej liście;
+można ją jednak dodać, wprowadzając jej adres.

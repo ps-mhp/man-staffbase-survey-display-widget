@@ -2,9 +2,11 @@
 
 | Instelling | Beschrijving |
 | --- | --- |
-| Installatie-ID van de enquête | De ID van de te tonen enquête-installatie — de reeks van 24 tekens aan het einde van de URL van de enquête. Verplicht veld. |
-| Adres van de enquête-plug-in | Alleen wijzigen als de enquête-app zich in een andere regio bevindt dan de standaardinstelling. Meestal ongewijzigd laten. |
+| Installatie-ID van de enquête | De enquête die moet worden weergegeven. Verplicht veld. Meestal via de keuzelijst; als alternatief kunt u het volledige adres van de enquête invoeren of de 24-cijferige tekenreeks aan het einde daarvan. |
+| Adres van de enquête-plugin | Technisch adres van de enquête-app. Standaard ingesteld en dient in de regel **ongewijzigd** te blijven. Alleen aanpassen als de enquête-app van de organisatie in een andere regio wordt gehost — dat is iets voor de IT-afdeling, niet voor de redactie. |
 
-In plaats van alleen de ID kan bij „Installatie-ID van de enquête“ ook de
-volledige enquête-URL worden ingevoerd; de widget haalt de ID
-daar zelf uit.
+## Over de keuzelijst
+
+De lijst toont alleen enquêtes waarvoor u **beheerdersrechten** hebt. Een
+externe enquête die u mag insluiten, verschijnt daar dus niet; deze
+kunt u desondanks toevoegen door het adres in te voeren.

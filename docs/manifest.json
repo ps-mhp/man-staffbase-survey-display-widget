@@ -1,11 +1,16 @@
 {
   "title": "Umfrage-Anzeige",
-  "summary": "Bettet eine Staffbase-Umfrage-Installation an der Stelle ein, an der das Widget platziert wird.",
+  "summary": "Zeigt eine bestehende Staffbase-Umfrage direkt auf einer beliebigen Seite an.",
   "pages": [
     {
       "id": "overview",
       "title": "Übersicht",
       "file": "overview.md"
+    },
+    {
+      "id": "usage",
+      "title": "Schritt für Schritt",
+      "file": "usage.md"
     },
     {
       "id": "settings",

@@ -1,11 +1,16 @@
 {
   "title": "Ogłoszenie dotyczące ankiety",
-  "summary": "Osadza instalację ankiety Staffbase w miejscu, w którym zostanie umieszczony widget.",
+  "summary": "Wyświetla istniejącą ankietę Staffbase bezpośrednio na dowolnej stronie.",
   "pages": [
     {
       "id": "overview",
       "title": "Przegląd",
       "file": "overview.md"
+    },
+    {
+      "id": "usage",
+      "title": "Krok po kroku",
+      "file": "usage.md"
     },
     {
       "id": "settings",

@@ -1,11 +1,16 @@
 {
   "title": "Anuncio de encuesta",
-  "summary": "Incorpora una encuesta de Staffbase en el lugar donde se coloque el widget.",
+  "summary": "Muestra una encuesta existente de Staffbase directamente en cualquier página.",
   "pages": [
     {
       "id": "overview",
       "title": "Resumen",
       "file": "overview.md"
+    },
+    {
+      "id": "usage",
+      "title": "Paso a paso",
+      "file": "usage.md"
     },
     {
       "id": "settings",

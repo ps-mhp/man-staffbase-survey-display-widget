@@ -2,9 +2,11 @@
 
 | Einstellung | Beschreibung |
 | --- | --- |
-| Installations-ID der Umfrage | Die ID der anzuzeigenden Umfrage-Installation — die 24-stellige Zeichenfolge am Ende der Umfragen-URL. Pflichtfeld. |
-| Adresse des Umfragen-Plugins | Nur ändern, wenn die Umfragen-App in einer anderen Region liegt als die Voreinstellung. In der Regel unverändert lassen. |
+| Installations-ID der Umfrage | Die anzuzeigende Umfrage. Pflichtfeld. Normalerweise über die Auswahlliste; alternativ die vollständige Umfragen-Adresse einfügen oder die 24-stellige Zeichenfolge an deren Ende. |
+| Adresse des Umfragen-Plugins | Technische Adresse der Umfragen-App. Voreingestellt und in aller Regel **unverändert** zu lassen. Nur anzupassen, wenn die Umfragen-App der Organisation in einer anderen Region betrieben wird — das weiß die IT, nicht die Redaktion. |
 
-Statt der reinen ID kann bei „Installations-ID der Umfrage“ auch die
-vollständige Umfragen-URL eingefügt werden; das Widget liest sich die ID
-selbst daraus heraus.
+## Zur Auswahlliste
+
+Die Liste zeigt nur Umfragen, für die Sie **Verwaltungsrechte** haben. Eine
+fremde Umfrage, die Sie einbetten dürfen, taucht dort also nicht auf; sie
+lässt sich trotzdem über das Einfügen der Adresse eintragen.

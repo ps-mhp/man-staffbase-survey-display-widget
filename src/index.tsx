@@ -11,6 +11,7 @@
  * limitations under the License.
  */
 
+import { startWidget } from "@shared/dev-mode/start-widget";
 import { setPublicPathFromBundle } from "@shared/public-path";
 
 // Must run before any dynamic `import()`, so that lazily loaded chunks come
@@ -148,6 +149,15 @@ const externalBlockDefinition: ExternalBlockDefinition = {
 // The guard lets the module load in Jest/jsdom where defineBlock is absent,
 // while keeping the call unconditional in the real Staffbase host, where it is
 // always present — in the editor and on a published page alike.
+// Registration runs through `startWidget`, which first asks whether a local
+// development server serves this widget. On virtually every browser the answer
+// is no and this registers immediately; on the developer's machine the local
+// bundle takes over and registers instead. Only ever one of the two, a block
+// name cannot be claimed twice.
 if (typeof window.defineBlock === "function") {
-  window.defineBlock(externalBlockDefinition);
+  void startWidget({
+    name: "survey-display-widget",
+    version: pkg.version,
+    register: () => window.defineBlock(externalBlockDefinition),
+  });
 }

@@ -1,11 +1,16 @@
 {
   "title": "Anúncio de inquérito",
-  "summary": "Incorpora uma instalação de inquérito do Staffbase no local onde o widget é colocado.",
+  "summary": "Exibe um inquérito existente do Staffbase diretamente em qualquer página.",
   "pages": [
     {
       "id": "overview",
       "title": "Visão geral",
       "file": "overview.md"
+    },
+    {
+      "id": "usage",
+      "title": "Passo a passo",
+      "file": "usage.md"
     },
     {
       "id": "settings",

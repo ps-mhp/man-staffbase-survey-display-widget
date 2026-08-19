@@ -1,11 +1,16 @@
 {
   "title": "Advertentie voor een enquête",
-  "summary": "Sluit een Staffbase-enquête-installatie in op de plek waar de widget wordt geplaatst.",
+  "summary": "Geef een bestaande Staffbase-enquête direct op een willekeurige pagina weer.",
   "pages": [
     {
       "id": "overview",
       "title": "Overzicht",
       "file": "overview.md"
+    },
+    {
+      "id": "usage",
+      "title": "Stap voor stap",
+      "file": "usage.md"
     },
     {
       "id": "settings",

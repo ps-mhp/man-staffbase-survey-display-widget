@@ -1,11 +1,16 @@
 {
   "title": "Survey Ad",
-  "summary": "Embeds a Staffbase survey installation where the widget is placed.",
+  "summary": "Displays an existing Staffbase survey directly on any page.",
   "pages": [
     {
       "id": "overview",
       "title": "Overview",
       "file": "overview.md"
+    },
+    {
+      "id": "usage",
+      "title": "Step by step",
+      "file": "usage.md"
     },
     {
       "id": "settings",
