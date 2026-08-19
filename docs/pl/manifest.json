@@ -1,0 +1,31 @@
+{
+  "title": "Ogłoszenie dotyczące ankiety",
+  "summary": "Osadza instalację ankiety Staffbase w miejscu, w którym zostanie umieszczony widget.",
+  "icon": "📋",
+  "pages": [
+    {
+      "id": "overview",
+      "title": "Przegląd",
+      "file": "overview.md"
+    },
+    {
+      "id": "settings",
+      "title": "Ustawienia",
+      "file": "settings.md"
+    },
+    {
+      "id": "faq",
+      "title": "Najczęściej zadawane pytania",
+      "file": "faq.md"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Ankieta",
+      "attributes": {},
+      "resolve": [
+        "installation-id"
+      ]
+    }
+  ]
+}

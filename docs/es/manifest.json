@@ -1,0 +1,31 @@
+{
+  "title": "Anuncio de encuesta",
+  "summary": "Incorpora una encuesta de Staffbase en el lugar donde se coloque el widget.",
+  "icon": "📋",
+  "pages": [
+    {
+      "id": "overview",
+      "title": "Resumen",
+      "file": "overview.md"
+    },
+    {
+      "id": "settings",
+      "title": "Configuración",
+      "file": "settings.md"
+    },
+    {
+      "id": "faq",
+      "title": "Preguntas frecuentes",
+      "file": "faq.md"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Encuesta",
+      "attributes": {},
+      "resolve": [
+        "installation-id"
+      ]
+    }
+  ]
+}

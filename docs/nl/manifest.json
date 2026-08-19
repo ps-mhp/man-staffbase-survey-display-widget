@@ -1,0 +1,31 @@
+{
+  "title": "Advertentie voor een enquête",
+  "summary": "Sluit een Staffbase-enquête-installatie in op de plek waar de widget wordt geplaatst.",
+  "icon": "📋",
+  "pages": [
+    {
+      "id": "overview",
+      "title": "Overzicht",
+      "file": "overview.md"
+    },
+    {
+      "id": "settings",
+      "title": "Instellingen",
+      "file": "settings.md"
+    },
+    {
+      "id": "faq",
+      "title": "Veelgestelde vragen",
+      "file": "faq.md"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Enquête",
+      "attributes": {},
+      "resolve": [
+        "installation-id"
+      ]
+    }
+  ]
+}

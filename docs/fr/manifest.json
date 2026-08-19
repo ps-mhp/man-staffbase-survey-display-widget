@@ -1,0 +1,31 @@
+{
+  "title": "Annonce relative à un sondage",
+  "summary": "Intègre une installation du sondage Staffbase à l'endroit où le widget est placé.",
+  "icon": "📋",
+  "pages": [
+    {
+      "id": "overview",
+      "title": "Aperçu",
+      "file": "overview.md"
+    },
+    {
+      "id": "settings",
+      "title": "Paramètres",
+      "file": "settings.md"
+    },
+    {
+      "id": "faq",
+      "title": "FAQ",
+      "file": "faq.md"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Sondage",
+      "attributes": {},
+      "resolve": [
+        "installation-id"
+      ]
+    }
+  ]
+}
