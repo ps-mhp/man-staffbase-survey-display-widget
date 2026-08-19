@@ -1,7 +1,6 @@
 {
   "title": "Survey Ad",
   "summary": "Embeds a Staffbase survey installation where the widget is placed.",
-  "icon": "📋",
   "pages": [
     {
       "id": "overview",

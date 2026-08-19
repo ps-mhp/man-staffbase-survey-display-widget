@@ -1,7 +1,6 @@
 {
   "title": "Ogłoszenie dotyczące ankiety",
   "summary": "Osadza instalację ankiety Staffbase w miejscu, w którym zostanie umieszczony widget.",
-  "icon": "📋",
   "pages": [
     {
       "id": "overview",

@@ -1,7 +1,6 @@
 {
   "title": "Pubblicità relativa al sondaggio",
   "summary": "Incorpora un'installazione del sondaggio Staffbase nel punto in cui viene posizionato il widget.",
-  "icon": "📋",
   "pages": [
     {
       "id": "overview",

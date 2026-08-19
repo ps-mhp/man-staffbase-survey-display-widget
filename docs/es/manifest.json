@@ -1,7 +1,6 @@
 {
   "title": "Anuncio de encuesta",
   "summary": "Incorpora una encuesta de Staffbase en el lugar donde se coloque el widget.",
-  "icon": "📋",
   "pages": [
     {
       "id": "overview",

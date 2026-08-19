@@ -1,7 +1,6 @@
 {
   "title": "Annonce relative à un sondage",
   "summary": "Intègre une installation du sondage Staffbase à l'endroit où le widget est placé.",
-  "icon": "📋",
   "pages": [
     {
       "id": "overview",

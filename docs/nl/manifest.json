@@ -1,7 +1,6 @@
 {
   "title": "Advertentie voor een enquête",
   "summary": "Sluit een Staffbase-enquête-installatie in op de plek waar de widget wordt geplaatst.",
-  "icon": "📋",
   "pages": [
     {
       "id": "overview",

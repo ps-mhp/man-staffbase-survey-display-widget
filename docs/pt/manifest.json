@@ -1,7 +1,6 @@
 {
   "title": "Anúncio de inquérito",
   "summary": "Incorpora uma instalação de inquérito do Staffbase no local onde o widget é colocado.",
-  "icon": "📋",
   "pages": [
     {
       "id": "overview",
