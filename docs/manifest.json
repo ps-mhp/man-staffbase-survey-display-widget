@@ -1,0 +1,17 @@
+{
+  "title": "Umfrage-Anzeige",
+  "summary": "Bettet eine Staffbase-Umfrage-Installation an der Stelle ein, an der das Widget platziert wird.",
+  "icon": "📋",
+  "pages": [
+    { "id": "overview", "title": "Übersicht", "file": "overview.md" },
+    { "id": "settings", "title": "Einstellungen", "file": "settings.md" },
+    { "id": "faq", "title": "FAQ", "file": "faq.md" }
+  ],
+  "examples": [
+    {
+      "title": "Umfrage",
+      "attributes": {},
+      "resolve": ["installation-id"]
+    }
+  ]
+}
