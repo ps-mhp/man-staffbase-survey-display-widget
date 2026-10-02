@@ -27,7 +27,7 @@ describe("readInstallationId", () => {
   });
 
   it("reads the id out of a pasted survey url", () => {
-    expect(readInstallationId(`https://www.onetruck.man/content/surveys/${INSTALLATION_ID}`)).toBe(
+    expect(readInstallationId(`https://www.mti.man/content/surveys/${INSTALLATION_ID}`)).toBe(
       INSTALLATION_ID,
     );
   });
@@ -62,7 +62,7 @@ describe("documentLocale", () => {
 });
 
 describe("buildSurveyAttributes", () => {
-  const branch = { slug: "mansales", webUrl: "https://www.onetruck.man" };
+  const branch = { slug: "mansales", webUrl: "https://www.mti.man" };
 
   it("names the installation under both spellings the element reads", () => {
     const attributes = buildSurveyAttributes({
@@ -91,7 +91,7 @@ describe("buildSurveyAttributes", () => {
     ]) {
       expect(attributes[name]).toBeTruthy();
     }
-    expect(attributes["data-app-base-url"]).toBe("https://www.onetruck.man");
+    expect(attributes["data-app-base-url"]).toBe("https://www.mti.man");
     expect(attributes["data-app-branch-slug"]).toBe("mansales");
   });
 

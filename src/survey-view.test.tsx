@@ -21,7 +21,7 @@ import * as attributes from "./survey-attributes";
 
 const INSTALLATION_ID = "6a7c13cf2b9a846ee2d8955d";
 
-const branch = { slug: "mansales", webUrl: "https://www.onetruck.man" };
+const branch = { slug: "mansales", webUrl: "https://www.mti.man" };
 
 describe("SurveyView", () => {
   afterEach(() => {
@@ -42,7 +42,7 @@ describe("SurveyView", () => {
     });
 
     expect(element.getAttribute("installation-id")).toBe(INSTALLATION_ID);
-    expect(element.getAttribute("data-app-base-url")).toBe("https://www.onetruck.man");
+    expect(element.getAttribute("data-app-base-url")).toBe("https://www.mti.man");
     expect(element.getAttribute("data-app-branch-slug")).toBe("mansales");
     expect(element.getAttribute("data-app-version")).toBeTruthy();
     expect(loader.loadSurveyPlugin).toHaveBeenCalledWith(DEFAULT_PLUGIN_URL);
