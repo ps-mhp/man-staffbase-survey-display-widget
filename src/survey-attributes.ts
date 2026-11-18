@@ -17,6 +17,19 @@ export const SURVEY_ELEMENT = "survey-plugin-employee-block";
 /** Where the survey plugin lives unless the author says otherwise. */
 export const DEFAULT_PLUGIN_URL = "https://pluginsurveys-de1.staffbase.com";
 
+/**
+ * The plugin host to load the survey bundle from.
+ *
+ * The field carries a default, but a saved configuration from before the field
+ * existed has nothing under the key at all — so the default is applied here as
+ * well and not only in the dialog.
+ */
+export function readPluginUrl(raw: unknown): string {
+  if (typeof raw !== "string") return DEFAULT_PLUGIN_URL;
+  const trimmed = raw.trim().replace(/\/+$/, "");
+  return trimmed === "" ? DEFAULT_PLUGIN_URL : trimmed;
+}
+
 /** The shape of a Staffbase backend id: 24 hex digits. */
 const INSTALLATION_ID = /[0-9a-f]{24}/gi;
 

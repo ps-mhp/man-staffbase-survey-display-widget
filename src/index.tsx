@@ -21,66 +21,23 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import { BlockFactory, BlockDefinition, ExternalBlockDefinition, BaseBlock } from "widget-sdk";
-import { configurationSchema, uiSchema } from "./configuration-schema";
-import { BranchContext, DEFAULT_PLUGIN_URL, readInstallationId } from "./survey-attributes";
-import { fetchEntityCatalog } from "@shared/entity-picker/entity-catalog";
-import { startEntityPickerInjector } from "@shared/entity-picker/entity-picker-injector";
-import { surveyCatalogSource } from "./survey-catalog";
+import { ALL_ATTRIBUTES, configurationSchema, uiSchema } from "./configuration-schema";
+import { BranchContext } from "./survey-attributes";
+import { resolveSurvey } from "./survey-config";
+import { startSurveyDialog } from "./survey-dialog";
 import { SurveyView } from "./survey-view";
 import icon from "../resources/survey-display-widget.svg";
 import pkg from "../package.json";
 
-/**
- * The names the configuration goes by.
- *
- * Each has to be spelled the same in three places: the key in the
- * configuration schema, the attribute declared to the host, and the name read
- * back here. They are also the attributes registered for this widget in
- * `widgets.json`.
- */
-export const INSTALLATION_ID_ATTRIBUTE = "installation-id";
-export const PLUGIN_URL_ATTRIBUTE = "plugin-url";
+export {
+  INSTALLATION_ID_ATTRIBUTE,
+  PLUGIN_URL_ATTRIBUTE,
+  SURVEY_CONFIG_ATTRIBUTE,
+} from "./configuration-schema";
+export { readPluginUrl } from "./survey-attributes";
 
-/** Attributes handled by the widget; mirrored in the configuration schema. */
-const widgetAttributes: string[] = [INSTALLATION_ID_ATTRIBUTE, PLUGIN_URL_ATTRIBUTE];
-
-/**
- * The plugin host to load the survey bundle from.
- *
- * The field carries a default, but a saved configuration from before the field
- * existed has nothing under the key at all — so the default is applied here as
- * well and not only in the dialog.
- */
-export function readPluginUrl(raw: unknown): string {
-  if (typeof raw !== "string") return DEFAULT_PLUGIN_URL;
-  const trimmed = raw.trim().replace(/\/+$/, "");
-  return trimmed === "" ? DEFAULT_PLUGIN_URL : trimmed;
-}
-
-/**
- * Watches for the configuration dialog from module load on.
- *
- * The dialog is opened by the host, not by this widget, and may already be on
- * screen by the time the bundle arrives — so there is no render to hook into.
- * Costs nothing on a published page, where the field never appears.
- *
- * Exported only so tests can dispose of the observer on teardown (jsdom tears
- * down its `window` between test files, which would otherwise let a lingering
- * `MutationObserver` callback throw); production code never calls this.
- */
-/** Copy for the dropdown next to the `installation-id` field. */
-const SURVEY_PICKER_LABELS = {
-  placeholder: "Umfrage auswählen …",
-  manualOption: "Andere ID eingeben …",
-  unavailableNotice:
-    "Die Liste der Umfragen konnte nicht geladen werden. Bitte die Installations-ID eintragen.",
-};
-
-export const stopSurveyPickerInjector = startEntityPickerInjector({
-  fieldKey: INSTALLATION_ID_ATTRIBUTE,
-  fetchOptions: () => fetchEntityCatalog(surveyCatalogSource),
-  labels: SURVEY_PICKER_LABELS,
-});
+/** Alle angemeldeten Attribute: `survey-config` zuerst, die Einzelfelder älterer Fassungen dahinter. */
+const widgetAttributes: string[] = ALL_ATTRIBUTES;
 
 const factory: BlockFactory = (BaseBlockClass, widgetApi) => {
   return class SurveyDisplayWidgetBlock extends BaseBlockClass implements BaseBlock {
@@ -103,9 +60,9 @@ const factory: BlockFactory = (BaseBlockClass, widgetApi) => {
     }
 
     public renderBlock(container: HTMLElement): void {
-      const attrs = this.parseAttributes<Record<string, unknown>>();
-      const installationId = readInstallationId(attrs[INSTALLATION_ID_ATTRIBUTE]);
-      const pluginUrl = readPluginUrl(attrs[PLUGIN_URL_ATTRIBUTE]);
+      // `survey-config`, je Schlüssel ergänzt um die Einzelfelder älterer
+      // Fassungen (`survey-config.ts`): ein alter Block rendert wie bisher.
+      const { installationId, pluginUrl } = resolveSurvey(this.parseAttributes<Record<string, unknown>>());
 
       // The SDK is assumed to pass the same container for the life of the block.
       this._root ??= ReactDOM.createRoot(container);
@@ -154,10 +111,18 @@ const externalBlockDefinition: ExternalBlockDefinition = {
 // is no and this registers immediately; on the developer's machine the local
 // bundle takes over and registers instead. Only ever one of the two, a block
 // name cannot be claimed twice.
+//
+// Das Fenster „Umfrage wählen“ hängt am Anmelden, nicht am Laden: auf
+// Modulebene gestartet, belegte das installierte Bündel das Feld
+// `survey-config`, bevor feststeht, ob ein lokaler Entwicklungsserver
+// übernimmt.
 if (typeof window.defineBlock === "function") {
   void startWidget({
     name: "survey-display-widget",
     version: pkg.version,
-    register: () => window.defineBlock(externalBlockDefinition),
+    register: () => {
+      startSurveyDialog();
+      window.defineBlock(externalBlockDefinition);
+    },
   });
 }
