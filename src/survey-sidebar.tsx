@@ -20,10 +20,9 @@
  */
 
 import * as React from "react";
-import { Search } from "lucide-react";
-import { Input } from "@man/config-ui/primitives/input";
 import { ItemList, ListItem } from "@man/config-ui/sidebar/item-list";
 import { SidebarPanel } from "@man/config-ui/sidebar/sidebar-panel";
+import { SidebarSearch } from "@man/config-ui/sidebar/sidebar-search";
 
 import type { SurveyCatalog } from "./survey-catalog-state";
 
@@ -41,30 +40,6 @@ const EMPTY_TEXT =
 
 /** Die Zeile kennt nur den Titel; zur Unterscheidung gleich benannter Umfragen steht das Ende der ID darunter. */
 const descriptionOf = (id: string): string => `ID …${id.slice(-6)}`;
-
-/** Das Suchfeld; Escape leert es zuerst, erst ein leeres Feld lässt Escape an den Rahmen. */
-function SurveySearch({ query, onQueryChange }: { query: string; onQueryChange: (query: string) => void }): React.ReactElement {
-  return (
-    <div className="sticky top-0 z-10 -mx-2 bg-muted px-4 pb-3">
-      <div className="relative">
-        <Search className="pointer-events-none absolute top-3 left-3 size-4 text-muted-foreground" aria-hidden />
-        <Input
-          type="search"
-          aria-label={SEARCH_LABEL}
-          placeholder={SEARCH_LABEL}
-          value={query}
-          onChange={(event) => onQueryChange(event.target.value)}
-          onKeyDown={(event) => {
-            if (event.key !== "Escape" || query === "") return;
-            event.preventDefault();
-            onQueryChange("");
-          }}
-          className="h-10 bg-background pl-[38px]"
-        />
-      </div>
-    </div>
-  );
-}
 
 function itemsOf(catalog: SurveyCatalog, query: string): ListItem[] {
   if (catalog.status !== "ready") return [];
@@ -86,7 +61,7 @@ export function SurveySidebar({ catalog, selectedId, onSelect }: SurveySidebarPr
 
   return (
     <SidebarPanel title="Umfragen" count={total}>
-      <SurveySearch query={query} onQueryChange={setQuery} />
+      <SidebarSearch aria-label={SEARCH_LABEL} value={query} onValueChange={setQuery} />
       <ItemList
         aria-label="Umfragen"
         items={items}
