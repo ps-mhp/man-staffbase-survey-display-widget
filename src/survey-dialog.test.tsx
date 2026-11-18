@@ -22,11 +22,13 @@ import { act, fireEvent, render } from "@testing-library/react";
 import Form from "@rjsf/mui";
 import validator from "@rjsf/validator-ajv8";
 
-import { modalRoot, settleModal } from "@shared/ui/config-modal.testing";
+import { modalRoot, settleModal, settleEditor, clickElement } from "@shared/ui/config-modal.testing";
 import { configurationSchema } from "./configuration-schema";
 import { DEFAULT_PLUGIN_URL } from "./survey-attributes";
 import { readSurveyConfigParts, resolveSurvey } from "./survey-config";
 import { startSurveyDialog, surveyEditorShell } from "./survey-dialog";
+
+const EDITOR_SELECTOR = "Pulscheck";
 
 const mockEditorLoaded = jest.fn();
 jest.mock("./survey-editor", () => {
@@ -64,22 +66,8 @@ const fieldValue = (container: HTMLElement): string =>
 
 const inModal = (selector: string): HTMLElement | null => modalRoot()?.querySelector<HTMLElement>(selector) ?? null;
 
-async function click(element: Element | null): Promise<void> {
-  if (element === null) throw new Error("Nichts zum Klicken gefunden");
-  await act(async () => {
-    (element as HTMLElement).click();
-  });
-}
-
 const rowNamed = (name: string): Element | null =>
   Array.from(modalRoot()?.querySelectorAll('[role="row"]') ?? []).find((row) => row.textContent?.includes(name)) ?? null;
-
-/** Das Modal lädt nach, der Editor darin noch einmal, dann die Liste: so oft warten, bis alles da ist. */
-async function settleEditor(): Promise<void> {
-  for (let round = 0; round < 8 && rowNamed("Pulscheck") === null; round += 1) {
-    await settleModal();
-  }
-}
 
 /** Der eigene Dialog neben einem fremden mit gleichem Feldnamen (`plugin-url`). */
 function Dialogs({ formData }: { formData: Record<string, string> }): React.ReactElement {
@@ -104,7 +92,7 @@ async function open(formData: Record<string, string>): Promise<{ container: HTML
   await act(async () => {
     stop = startSurveyDialog(container);
   });
-  await settleEditor();
+  await settleEditor(EDITOR_SELECTOR);
   return { container, stop };
 }
 
@@ -167,8 +155,8 @@ describe("startSurveyDialog", () => {
   it("schreibt beim ersten Übernehmen beide Werte nach survey-config; die Altfelder bleiben", async () => {
     const { container, stop } = await open({ "installation-id": A, "plugin-url": US });
 
-    await click(rowNamed("Pulscheck"));
-    await click(inModal('[data-testid="config-shell-apply"]'));
+    await clickElement(rowNamed("Pulscheck"));
+    await clickElement(inModal('[data-testid="config-shell-apply"]'));
 
     expect(readSurveyConfigParts(fieldValue(container))).toEqual({ installationId: B, pluginUrl: US });
     expect(container.querySelector<HTMLInputElement>('#survey [id="root_installation-id"]')!.value).toBe(A);
@@ -196,12 +184,12 @@ describe("startSurveyDialog", () => {
     fireEvent.change(input, { target: { value: "" } });
     fireEvent.change(input, { target: { value: "nichts" } });
 
-    await click(inModal('[data-testid="config-shell-apply"]'));
+    await clickElement(inModal('[data-testid="config-shell-apply"]'));
     expect(fieldValue(container)).toBe("");
     expect(inModal('[role="alert"]')).toHaveTextContent("Umfrage auswählen");
 
-    await click(rowNamed("Mitarbeiterbefragung"));
-    await click(inModal('[data-testid="config-shell-apply"]'));
+    await clickElement(rowNamed("Mitarbeiterbefragung"));
+    await clickElement(inModal('[data-testid="config-shell-apply"]'));
     expect(readSurveyConfigParts(fieldValue(container))?.installationId).toBe(A);
 
     await act(async () => stop());
@@ -212,7 +200,7 @@ describe("startSurveyDialog", () => {
     const input = inModal('input[type="text"]') as HTMLInputElement;
 
     fireEvent.change(input, { target: { value: `https://x.test/surveys/${B}` } });
-    await click(inModal('[data-testid="config-shell-apply"]'));
+    await clickElement(inModal('[data-testid="config-shell-apply"]'));
 
     expect(readSurveyConfigParts(fieldValue(container))?.installationId).toBe(B);
 
@@ -239,7 +227,7 @@ describe("startSurveyDialog", () => {
   it("zeigt in der Geräteansicht die Beispielvorschau mit dem gewählten Titel", async () => {
     const { stop } = await open({ "installation-id": A });
 
-    await click(Array.from(modalRoot()!.querySelectorAll<HTMLElement>('button, [role="radio"]')).find((b) => b.textContent?.trim() === "Desktop") ?? null);
+    await clickElement(Array.from(modalRoot()!.querySelectorAll<HTMLElement>('button, [role="radio"]')).find((b) => b.textContent?.trim() === "Desktop") ?? null);
     await settleModal();
 
     expect(inModal('[data-testid="survey-preview"]')).toHaveAttribute("inert");
