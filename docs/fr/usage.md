@@ -6,27 +6,37 @@
    et publié dans l'**application Sondages de Staffbase**.
 2. Ouvrez la page de destination pour la modifier et faites glisser le widget **Affichage du sondage** à
    l'emplacement souhaité.
-3. Dans le champ **ID d'installation du sondage**, sélectionnez le sondage dans la liste de sélection.
-   Cette liste contient les sondages que vous êtes autorisé à gérer.
-4. Ne modifiez pas le champ **Adresse du plugin de sondage**.
-5. Enregistrez et vérifiez dans l’aperçu.
+3. Ouvrez **Sélectionner un sondage** dans le widget. À gauche, sélectionnez le sondage dans la liste
+   ; la barre de recherche située au-dessus permet de filtrer par titre. La liste contient les
+   sondages que vous êtes autorisé à gérer.
+4. Ne modifiez pas l’**adresse du plugin de sondage** (onglet « Avancé »)
+  .
+5. Sélectionnez **Appliquer**, enregistrez et vérifiez la page. L’aperçu dans la
+   fenêtre (ordinateur de bureau, tablette, mobile) est un exemple ; le véritable sondage
+   n’apparaîtra que sur la page.
 
-Tant qu’aucune valeur n’est saisie, la mention « Aucun
+Tant que rien n’est saisi, la mention « Aucun
 ID d’installation configuré » s’affiche à cet emplacement — y compris sur la page publiée.
 
 ## Si aucune liste de sélection n’apparaît
 
-À la place de la liste, le message « La liste des sondages n’a pas pu
-être chargée » s’affiche. Dans ce cas, saisissez manuellement :
+Dans ce cas, la colonne « Sondages » reste vide et indique la raison. Saisissez manuellement :
 
-1. Ouvrez le sondage dans l’application de sondages.
+1. Ouvrez le sondage dans l’application Sondages.
 2. Copiez l’**adresse complète** depuis la barre d’adresse.
-3. Collez-la dans le champ **ID d’installation du sondage** — le widget
-   récupère lui-même l’ID.
-4. Enregistrez.
+3. Collez-la dans le champ **ID d’installation du sondage** situé à droite dans l’onglet « Contenu »
+   — le widget récupère lui-même l’ID.
+4. Sélectionnez **Appliquer** et enregistrez.
 
 ## Remplacer un sondage
 
-1. Dans le champ **ID d’installation du sondage**, sélectionnez un autre sondage ou
-   collez son adresse.
-2. Enregistrez et vérifiez dans l’aperçu.
+1. Ouvrez la fenêtre **Sélectionner un sondage**.
+2. Sélectionnez un autre sondage à gauche ou collez son adresse dans le champ **ID d’installation
+   du sondage**.
+3. Sélectionnez **Appliquer**, enregistrez et vérifiez la page.
+
+## Widgets existants
+
+Les widgets configurés avant cette version continuent d’afficher leur
+sondage sans changement. Ce n’est qu’après avoir modifié un paramètre dans la fenêtre et cliqué sur **Appliquer** que le nouveau
+paramètre prendra effet.

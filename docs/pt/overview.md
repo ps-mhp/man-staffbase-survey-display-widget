@@ -1,19 +1,19 @@
 # Visualização da sondagem
 
-A visualização da sondagem insere uma sondagem existente da Staffbase numa
+A visualização da sondagem apresenta uma sondagem existente do Staffbase em
 qualquer página. Os leitores podem responder diretamente a partir daí, sem terem de
-aceder à secção de sondagens — por exemplo, na página inicial, numa página de equipa ou
+mudar para a secção de sondagens — por exemplo, na página inicial, numa página de equipa ou
 numa página de ação.
 
 ## O que o widget faz — e o que não faz
 
-**Exibe** uma sondagem que já tenha sido criada na aplicação de sondagens da Staffbase.
-**Não cria** sondagens nem **edita** perguntas.
+Ele **exibe** uma sondagem que já tenha sido criada na aplicação de sondagens da Staffbase.
+Não **cria** sondagens nem **edita** perguntas.
 As perguntas, o período de vigência, o público-alvo e a análise permanecem inteiramente na
 aplicação de inquéritos; o widget é apenas um segundo local de exibição.
 
-Daí decorre o seguinte: primeiro, crie e
-publique o inquérito na aplicação de inquéritos; depois, insira o widget.
+Consequentemente: primeiro, crie e
+publique o inquérito na aplicação de inquéritos e, só depois, insira o widget.
 
 ## Importante saber
 

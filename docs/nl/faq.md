@@ -1,27 +1,27 @@
 # Veelgestelde vragen
 
-**Vraag:** Er verschijnt de melding „Geen installatie-ID geconfigureerd. Voer de ID van de
-enquête in de widgetinstellingen in.”
+**Vraag:** Er verschijnt de melding „Er is geen installatie-ID geconfigureerd. Voer de ID van de
+enquête in de widgetinstellingen in.“
 
-Antwoord: Er is geen enquête geselecteerd. Kies een enquête uit de lijst of
-voeg het volledige adres van de enquête in het veld in.
+Antwoord: Er is geen enquête geselecteerd. Selecteer in het venster „Enquête selecteren“ de enquête
+uit de lijst of voer het volledige adres van de enquête in het veld in.
 
-**Vraag:** Er verschijnt de melding „Enquête kon niet worden geladen“.
+**Vraag:** Er verschijnt „Enquête kon niet worden geladen“.
 
 Antwoord: Meestal klopt de installatie-ID niet, of is de enquête
 verwijderd of niet gepubliceerd. Voer ter controle het volledige adres
-van de enquête opnieuw in het veld in. Als er in de melding ook een
+van de enquête opnieuw in het venster „Enquête kiezen“ in. Als er in de melding bovendien een
 webadres staat, is de enquête-app niet gevonden op het ingevoerde adres
-— zet dan het veld „Adres van de enquête-plugin“ terug naar de standaardinstelling
-.
+— zet dan het „Adres van de enquête-plugin“ (tabblad „Geavanceerd“) terug naar de
+standaardinstelling.
 
-**Vraag:** In het configuratievenster staat „De lijst met enquêtes kon niet
-worden geladen. Voer de installatie-ID in.“
+**Vraag:** In het venster „Enquête selecteren“ is de lijst met enquêtes leeg.
 
-Antwoord: Geen reden tot bezorgdheid — de keuzelijst is slechts een extraatje.
-Voer het volledige adres van de enquête in het veld in, dat is voldoende.
+Antwoord: Geen reden tot bezorgdheid — de keuzelijst is slechts een extra gemak.
+Voer het volledige adres van de enquête in het tabblad „Inhoud“ in het veld in,
+dat is voldoende.
 
-**Vraag:** Wanneer moet ik het „Adres van de enquête-plugin“ wijzigen?
+**Vraag:** Wanneer moet ik het „adres van de enquête-plugin“ wijzigen?
 
 Antwoord: Vrijwel nooit. Alleen als de enquête-app van de organisatie zich in een
 andere regio bevindt dan de standaardinstelling. Bij twijfel laat je het ongewijzigd en
@@ -44,4 +44,10 @@ een bedankbericht of de resultaten.
 pagina’s insluit?
 
 Antwoord: Nee. Het is overal dezelfde enquête met één gezamenlijke
-uitslag.
+evaluatie.
+
+**Vraag:** Het voorbeeld in het venster toont een voorbeeldenquête, niet die van mij.
+
+Antwoord: Dat is de bedoeling. De echte enquête wordt geladen door de plug-in van de enquête-app en
+is afhankelijk van de voortgang van de betreffende persoon; deze verschijnt pas op de pagina.
+Het voorbeeld laat zien hoeveel ruimte de enquête daar in beslag neemt.

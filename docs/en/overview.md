@@ -1,14 +1,14 @@
 # Survey Widget
 
 The Survey Widget displays an existing Staffbase survey on any
-page. Readers can respond right there without having to go to the
+page. Readers can respond right there without having to switch to the
 Surveys section—for example, on the home page, a team page, or
 a campaign page.
 
-## What the widget does—and what it doesn’t do
+## What the widget does—and what it doesn’t
 
-It **displays** a survey that has already been created in the Staffbase Surveys app
-. It **does not create** a survey and **does not edit** questions.
+It **displays** a survey that has already been created in the Staffbase Surveys app.
+It **does not** create a survey or **edit** questions.
 Questions, duration, target audience, and results remain entirely within the
 Surveys app; the widget is simply a secondary display location.
 
@@ -23,5 +23,5 @@ publish the survey in the Surveys app, then add the widget.
   .
 - The widget automatically adopts the language and text direction from the page or
   the reader’s language settings. No configuration is required.
-- Responses are included in the Polls app’s analysis as usual. There is
-  no separate analysis for each page.
+- Responses are included in the Surveys app’s analysis as usual. There is
+  no separate analysis per page.

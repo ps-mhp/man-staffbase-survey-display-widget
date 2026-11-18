@@ -18,10 +18,10 @@ publiceer deze, en plaats daarna de widget.
 ## Belangrijk om te weten
 
 - De enquête wordt weergegeven zoals de Enquête-app deze presenteert —
-  inclusief de statussen „al beantwoord“, „Bedankt“ of „termijn
+  inclusief de statussen „al beantwoord“, „Bedankt“ of „Termijn
   verstreken“. Wat iemand ziet, hangt dus af van de status van zijn of haar eigen deelname
  .
-- De widget neemt de taal en tekstrichting automatisch over van de pagina of
-  de taalinstelling van de lezer. Hiervoor hoef je niets in te stellen.
+- De taal en tekstrichting worden automatisch door de widget overgenomen van de pagina of
+  de taalinstelling van de lezer. Hiervoor hoeft niets te worden ingesteld.
 - Antwoorden worden zoals gewoonlijk meegenomen in de analyse van de enquête-app. Er ontstaat
   geen aparte analyse per pagina.

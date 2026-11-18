@@ -1,31 +1,31 @@
 # Domande frequenti
 
 **Domanda:** Viene visualizzato il messaggio “Nessun ID di installazione configurato. Inserire l’ID del
-sondaggio nelle impostazioni del widget”.
+sondaggio nelle impostazioni del widget.”
 
-Risposta: Non è stato selezionato alcun sondaggio. Selezionare un sondaggio dall’elenco oppure
-inserire l’indirizzo completo del sondaggio nel campo.
+Risposta: Non è stato selezionato alcun sondaggio. Nella finestra «Seleziona sondaggio» scegli il sondaggio
+dall’elenco oppure inserisci l’indirizzo completo del sondaggio nel campo.
 
 **Domanda:** Viene visualizzato il messaggio «Impossibile caricare il sondaggio».
 
 Risposta: Nella maggior parte dei casi l’ID di installazione non è corretto, oppure il sondaggio è stato
-cancellato o non è stato pubblicato. Per verificare, inserire nuovamente l’indirizzo completo
-del sondaggio nel campo. Se nel messaggio è presente anche un
+eliminato o non è stato pubblicato. Per verificare, inserire nuovamente l’indirizzo completo
+del sondaggio nella finestra «Seleziona sondaggio». Se nel messaggio è presente anche un
 indirizzo web, significa che l’app dei sondaggi non è stata trovata all’indirizzo
-inserito — in tal caso, reimpostare il campo “Indirizzo del plugin dei sondaggi”
-alle impostazioni predefinite.
+inserito — in tal caso, ripristinare l’«Indirizzo del plugin dei sondaggi» (scheda «Avanzate») alle
+impostazioni predefinite.
 
-**Domanda:** Nella finestra di dialogo di configurazione compare il messaggio «Impossibile caricare l’elenco dei sondaggi.
-Inserire l’ID di installazione».
+**Domanda:** Nella finestra «Seleziona sondaggio» l’elenco dei sondaggi è vuoto.
 
-Risposta: Non c’è motivo di preoccuparsi: l’elenco a tendina è solo una funzione di comodità.
-È sufficiente inserire l’indirizzo completo del sondaggio nel campo.
+Risposta: Non c’è motivo di preoccuparsi: l’elenco di selezione è solo una funzione di comodità.
+Inserisci l’indirizzo completo del sondaggio nella scheda «Contenuto» nel campo previsto,
+è sufficiente.
 
-**Domanda:** Quando devo modificare l’«Indirizzo del plugin dei sondaggi»?
+**Domanda:** Quando devo modificare l’«indirizzo del plugin dei sondaggi»?
 
 Risposta: Praticamente mai. Solo se l’app dei sondaggi dell’organizzazione si trova in una
 regione diversa da quella predefinita. In caso di dubbio, lasciarlo invariato e
-chiedere al reparto IT.
+chiedere all’IT.
 
 **Domanda:** Posso modificare le domande o analizzare i risultati
 con questo widget?
@@ -43,5 +43,11 @@ un messaggio di ringraziamento o i risultati.
 **Domanda:** Le risposte vengono conteggiate due volte se incorporo lo stesso sondaggio su più
 pagine?
 
-Risposta: No. Si tratta sempre dello stesso sondaggio con una valutazione
+Risposta: No. Si tratta ovunque dello stesso sondaggio con una valutazione
 comune.
+
+**Domanda:** L’anteprima nella finestra mostra un sondaggio di esempio, non il mio.
+
+Risposta: È intenzionale. Il sondaggio vero e proprio viene caricato dal plugin dell’app per i sondaggi e
+dipende dallo stato di avanzamento di ciascuna persona; appare solo sulla pagina.
+L’anteprima mostra quanto spazio occuperà una volta pubblicato.
