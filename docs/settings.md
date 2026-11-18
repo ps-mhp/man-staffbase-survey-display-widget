@@ -1,9 +1,12 @@
 # Einstellungen
 
-| Einstellung | Beschreibung |
-| --- | --- |
-| Installations-ID der Umfrage | Die anzuzeigende Umfrage. Pflichtfeld. Normalerweise über die Auswahlliste; alternativ die vollständige Umfragen-Adresse einfügen oder die 24-stellige Zeichenfolge an deren Ende. |
-| Adresse des Umfragen-Plugins | Technische Adresse der Umfragen-App. Voreingestellt und in aller Regel **unverändert** zu lassen. Nur anzupassen, wenn die Umfragen-App der Organisation in einer anderen Region betrieben wird — das weiß die IT, nicht die Redaktion. |
+Alle Einstellungen stehen im Fenster **Umfrage wählen**.
+
+| Einstellung | Ort | Beschreibung |
+| --- | --- | --- |
+| Umfrage | Liste links | Die anzuzeigende Umfrage. Pflicht. Die Suche filtert nach dem Titel. |
+| Installations-ID der Umfrage | Reiter „Inhalt“ | Dieselbe Wahl von Hand: die vollständige Umfragen-Adresse einfügen oder die 24-stellige Zeichenfolge an deren Ende. Nötig, wenn die Liste fehlt oder die Umfrage nicht verwaltet wird. |
+| Adresse des Umfragen-Plugins | Reiter „Erweitert“ | Technische Adresse der Umfragen-App. Voreingestellt und in aller Regel **unverändert** zu lassen. Nur anzupassen, wenn die Umfragen-App der Organisation in einer anderen Region betrieben wird — das weiß die IT, nicht die Redaktion. |
 
 ## Zur Auswahlliste
 

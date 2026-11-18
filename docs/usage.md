@@ -6,27 +6,37 @@
    und veröffentlicht ist.
 2. Die Zielseite zur Bearbeitung öffnen und das Widget **Umfrage-Anzeige** an
    die gewünschte Stelle ziehen.
-3. Im Feld **Installations-ID der Umfrage** die Umfrage aus der Auswahlliste
-   wählen. Die Liste enthält die Umfragen, die Sie selbst verwalten dürfen.
-4. Das Feld **Adresse des Umfragen-Plugins** unverändert lassen.
-5. Speichern und in der Vorschau prüfen.
+3. Am Widget **Umfrage wählen** öffnen. Links die Umfrage aus der Liste
+   wählen; die Suche darüber filtert nach dem Titel. Die Liste enthält die
+   Umfragen, die Sie selbst verwalten dürfen.
+4. Die **Adresse des Umfragen-Plugins** (Reiter „Erweitert“) unverändert
+   lassen.
+5. **Übernehmen** wählen, speichern und die Seite prüfen. Die Vorschau im
+   Fenster (Desktop, Tablet, Mobil) ist eine Beispielansicht; die echte Umfrage
+   erscheint erst auf der Seite.
 
 Solange nichts eingetragen ist, steht an der Stelle der Hinweis „Keine
 Installations-ID konfiguriert“ — auch auf der veröffentlichten Seite.
 
 ## Wenn keine Auswahlliste erscheint
 
-Statt der Liste steht dann der Hinweis „Die Liste der Umfragen konnte nicht
-geladen werden“. Dann von Hand eintragen:
+Dann bleibt die Spalte „Umfragen“ leer und nennt den Grund. Von Hand eintragen:
 
 1. Die Umfrage in der Umfragen-App öffnen.
 2. Die **komplette Adresse** aus der Adresszeile kopieren.
-3. Sie in das Feld **Installations-ID der Umfrage** einfügen — die ID liest
-   sich das Widget selbst heraus.
-4. Speichern.
+3. Sie im Reiter „Inhalt“ rechts in das Feld **Installations-ID der Umfrage**
+   einfügen — die ID liest sich das Widget selbst heraus.
+4. **Übernehmen** wählen und speichern.
 
 ## Umfrage austauschen
 
-1. Im Feld **Installations-ID der Umfrage** eine andere Umfrage auswählen oder
-   deren Adresse einfügen.
-2. Speichern und in der Vorschau prüfen.
+1. Das Fenster **Umfrage wählen** öffnen.
+2. Links eine andere Umfrage wählen oder deren Adresse im Feld **Installations-ID
+   der Umfrage** einfügen.
+3. **Übernehmen** wählen, speichern und die Seite prüfen.
+
+## Bestehende Widgets
+
+Widgets, die vor dieser Fassung eingerichtet wurden, zeigen unverändert ihre
+Umfrage. Erst wenn Sie im Fenster etwas ändern und übernehmen, gilt die neue
+Einstellung.
