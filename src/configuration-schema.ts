@@ -35,7 +35,7 @@ export const PLUGIN_URL_ATTRIBUTE = "plugin-url";
 /**
  * Die Einzelfelder älterer Fassungen. Sie bleiben im Schema, damit der Dialog
  * ihre Werte weiter führt und Blöcke ohne `survey-config` unverändert
- * rendern; im Dialog sind sie ausgeblendet (`legacy-fields.ts`).
+ * rendern; im Dialog sind sie ausgeblendet (`@shared/legacy-fields`).
  */
 export const LEGACY_ATTRIBUTES = [INSTALLATION_ID_ATTRIBUTE, PLUGIN_URL_ATTRIBUTE] as const;
 

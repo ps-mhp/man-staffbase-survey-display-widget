@@ -22,11 +22,17 @@ import * as React from "react";
 import { ListChecks } from "lucide-react";
 
 import { FieldModalShellOptions, startFieldModalInjector } from "@shared/config-modal";
+import { legacyFieldsFromSchema, readLegacyFields, startHiddenFields } from "@shared/legacy-fields";
 
-import { LEGACY_ATTRIBUTES, SURVEY_CONFIG_ATTRIBUTE } from "./configuration-schema";
-import { readLegacyFromDialog, startHiddenFields } from "./legacy-fields";
-import { SurveyConfig, parseSurveyConfig, serializeSurveyConfig } from "./survey-config";
+import { LEGACY_ATTRIBUTES, SURVEY_CONFIG_ATTRIBUTE, configurationSchema } from "./configuration-schema";
+import { LegacySurveyAttributes, SurveyConfig, parseSurveyConfig, serializeSurveyConfig } from "./survey-config";
 import { surveyChangesStatus, validateSurveyConfig } from "./survey-editor-rules";
+
+const LEGACY_FIELDS = legacyFieldsFromSchema(LEGACY_ATTRIBUTES, configurationSchema);
+
+/** Die alten Felder, wie der eigene Dialog sie gerade führt. */
+const readLegacyFromDialog = (root: ParentNode): LegacySurveyAttributes =>
+  readLegacyFields(LEGACY_FIELDS, SURVEY_CONFIG_ATTRIBUTE, root).values as LegacySurveyAttributes;
 
 /**
  * Der Editor kommt erst, wenn das Fenster aufgeht: Tailwind und react-aria
