@@ -11,37 +11,16 @@
  * limitations under the License.
  */
 
-/** Die Umfrageliste des Fensters: einmal laden, solange es offen ist. */
-
-import * as React from "react";
+/** Die Umfrageliste des Fensters; geladen wird sie mit `useEntityCatalog`. */
 
 import { EntityOption, fetchEntityCatalog } from "@shared/entity-picker/entity-catalog";
+import type { EntityCatalog } from "@shared/entity-picker/use-entity-catalog";
 
 import { surveyCatalogSource } from "./survey-catalog";
 
-export type SurveyCatalog =
-  | { status: "loading" }
-  | { status: "ready"; surveys: readonly EntityOption[] };
+export type SurveyCatalog = EntityCatalog<EntityOption>;
 
 export type SurveyCatalogLoader = () => Promise<EntityOption[]>;
 
 /** Woher die Liste kommt; offengelegt für Tests. */
 export const DEFAULT_CATALOG_LOADER: SurveyCatalogLoader = () => fetchEntityCatalog(surveyCatalogSource);
-
-export function useSurveyCatalog(load: SurveyCatalogLoader): SurveyCatalog {
-  const [catalog, setCatalog] = React.useState<SurveyCatalog>({ status: "loading" });
-
-  React.useEffect(() => {
-    let current = true;
-    load()
-      .then((surveys) => current && setCatalog({ status: "ready", surveys }))
-      // `fetchEntityCatalog` fängt Fehler schon ab; ein anderer Lader soll
-      // trotzdem nur eine leere Liste kosten, nicht das Fenster.
-      .catch(() => current && setCatalog({ status: "ready", surveys: [] }));
-    return () => {
-      current = false;
-    };
-  }, [load]);
-
-  return catalog;
-}

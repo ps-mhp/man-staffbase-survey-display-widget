@@ -27,8 +27,10 @@ import * as React from "react";
 import { InspectorPanel, InspectorTab } from "@man/config-ui/inspector/inspector-panel";
 import { ConfigWorkspace } from "@man/config-ui/layout/config-workspace";
 
+import { useEntityCatalog } from "@shared/entity-picker/use-entity-catalog";
+
 import { readInstallationId } from "./survey-attributes";
-import { DEFAULT_CATALOG_LOADER, SurveyCatalog, SurveyCatalogLoader, useSurveyCatalog } from "./survey-catalog-state";
+import { DEFAULT_CATALOG_LOADER, SurveyCatalog, SurveyCatalogLoader } from "./survey-catalog-state";
 import type { SurveyConfig } from "./survey-config";
 import { PLUGIN_ISSUE } from "./survey-editor-rules";
 import { AdvancedSection, ContentSection, useIssue } from "./survey-editor-sections";
@@ -45,7 +47,7 @@ export interface SurveyEditorProps {
 /** Titel der gewählten Umfrage, sofern sie in der Liste steht. */
 function titleOf(catalog: SurveyCatalog, id: string | null): string | null {
   if (id === null || catalog.status !== "ready") return null;
-  return catalog.surveys.find((survey) => survey.id === id)?.title ?? null;
+  return catalog.items.find((survey) => survey.id === id)?.title ?? null;
 }
 
 /** Eine kleine Marke am Reiter „Erweitert“, solange dort ein Fehler wartet. */
@@ -67,7 +69,7 @@ function Heading({ id, title }: { id: string | null; title: string | null }): Re
 }
 
 export function SurveyEditor({ value, onChange, loadSurveys = DEFAULT_CATALOG_LOADER }: SurveyEditorProps): React.ReactElement {
-  const catalog = useSurveyCatalog(loadSurveys);
+  const catalog = useEntityCatalog(loadSurveys);
   const id = readInstallationId(value.installationId);
   const title = titleOf(catalog, id);
 

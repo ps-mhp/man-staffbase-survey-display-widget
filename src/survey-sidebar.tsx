@@ -44,7 +44,7 @@ const descriptionOf = (id: string): string => `ID …${id.slice(-6)}`;
 function itemsOf(catalog: SurveyCatalog, query: string): ListItem[] {
   if (catalog.status !== "ready") return [];
   const needle = query.trim().toLowerCase();
-  return catalog.surveys
+  return catalog.items
     .filter((survey) => needle === "" || survey.title.toLowerCase().includes(needle) || survey.id.includes(needle))
     .map((survey) => ({ id: survey.id, label: survey.title, description: descriptionOf(survey.id) }));
 }
@@ -57,7 +57,7 @@ function emptyTextOf(catalog: SurveyCatalog, query: string): string {
 export function SurveySidebar({ catalog, selectedId, onSelect }: SurveySidebarProps): React.ReactElement {
   const [query, setQuery] = React.useState("");
   const items = itemsOf(catalog, query);
-  const total = catalog.status === "ready" ? catalog.surveys.length : undefined;
+  const total = catalog.status === "ready" ? catalog.items.length : undefined;
 
   return (
     <SidebarPanel title="Umfragen" count={total}>
